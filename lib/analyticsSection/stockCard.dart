@@ -37,7 +37,7 @@ class StockCard extends StatelessWidget {
                   ),
                   Spacer(),
                   Container(
-                    child: Text("Stock Sold: ${card.sold}",
+                    child: card.sold==null ? Container() : Text("Stock Sold: ${card.sold}",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(color: Color(0xff13f61c), fontWeight: FontWeight.w600)
                       ),),

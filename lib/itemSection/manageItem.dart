@@ -76,7 +76,7 @@ List<Object> _itemlist = [];
                     textColor: Colors.white,
                     fontSize: 16.0);
               },
-              child: Text(
+              child: userModel.shopname==null ? Container() : Text(
                 "${userModel.shopname}",
                 style: GoogleFonts.spaceMono(
                   textStyle: TextStyle(

@@ -191,8 +191,8 @@ class _HomePageState extends State<HomePage>{
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
             },
-            child: Text(
-                "${userModel.username}",
+            child: userModel.username==null ? Container() : Text(
+                "${userModel.username} ",
               style: GoogleFonts.spaceMono(
                 textStyle: TextStyle(
                   fontSize: 20,

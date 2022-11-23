@@ -23,20 +23,20 @@ class BestCard extends StatelessWidget {
         child: ListTile(
           tileColor: Colors.pink[900],
           leading: CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
-          title: Text('${card.iname}', style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.yellowAccent, fontSize: 18, fontWeight: FontWeight.bold),),),
+          title: card.iname==null ? Container() : Text('${card.iname}', style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.yellowAccent, fontSize: 18, fontWeight: FontWeight.bold),),),
           subtitle: Column(
             children: [
               Row(
                 children: [
                   Container(
-                    child: Text("Stock Sold: ${card.sold}",
+                    child: card.sold==null ? Container() : Text("Stock Sold: ${card.sold}",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(color: Colors.purple[200], fontWeight: FontWeight.w600)
                       ),),
                   ),
                   Spacer(),
                   Container(
-                    child: Text("Profit: RM ${card.profit}",
+                    child: card.profit==null ? Container() : Text("Profit: RM ${card.profit}",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(color: Color(0xff13f61c), fontWeight: FontWeight.w600)
                       ),),

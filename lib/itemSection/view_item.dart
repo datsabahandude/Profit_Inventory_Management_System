@@ -191,7 +191,7 @@ class _ViewItemState extends State<ViewItem> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(5),
-                        child: Text(
+                        child: widget.card.iname==null ? Container() : Text(
                           '${widget.card.iname}',
                           textAlign: TextAlign.start,
                           style: GoogleFonts.poppins(
@@ -240,7 +240,7 @@ class _ViewItemState extends State<ViewItem> {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 5, 10, 5),
-                        child: Text(
+                        child: itemModel.ibuy==null ? Container() : Text(
                           'RM ${itemModel.ibuy}',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
@@ -278,7 +278,7 @@ class _ViewItemState extends State<ViewItem> {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 5, 10, 5),
-                        child: Text(
+                        child: itemModel.isell==null ? Container() : Text(
                           'RM ${itemModel.isell}',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
@@ -321,7 +321,7 @@ class _ViewItemState extends State<ViewItem> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                            child: Text(
+                            child: widget.card.description==null ? Container() : Text(
                               '${widget.card.description}\n',
                               textAlign: TextAlign.justify,
                               style: GoogleFonts.poppins(
@@ -379,7 +379,7 @@ class _ViewItemState extends State<ViewItem> {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 5, 10, 5),
-                        child: Text(
+                        child: itemModel.qty==null ? Container() : Text(
                           '${itemModel.qty}',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
