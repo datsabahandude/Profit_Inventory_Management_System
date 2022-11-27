@@ -197,8 +197,6 @@ class _HomePageState extends State<HomePage>{
                 textStyle: TextStyle(
                   fontSize: 20,
                   color: Colors.yellowAccent,
-                  //decoration: TextDecoration.underline,
-                  //decorationThickness: 1,
                   decorationColor: Colors.white,
                   fontWeight: FontWeight.w800
               ),),

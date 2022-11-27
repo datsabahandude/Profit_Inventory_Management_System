@@ -39,38 +39,6 @@ class MapScreenState extends State<ProfilePage>
     });
   }
   Widget build(BuildContext context) {
-    /*final emailField = TextFormField(
-        autofocus: false,
-        controller: emailEditingController,
-        keyboardType: TextInputType.emailAddress,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Please Enter your Email !';
-          }
-          else if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
-            return("Please Enter a valid Email");
-          }
-        },
-        onSaved: (value){
-          emailEditingController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            errorStyle: TextStyle(
-              fontSize: 12.0,
-              color: Colors.yellow,
-              fontWeight: FontWeight.w700,
-            ),
-            fillColor: Colors.white,
-            filled: true,
-            prefixIcon: Icon(Icons.mail, color: Colors.purple),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-            hintText: "${userModel.email}",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            )
-        ));*/
     final usernameField = TextFormField(
         autofocus: false,
         controller: usernameEditingController,

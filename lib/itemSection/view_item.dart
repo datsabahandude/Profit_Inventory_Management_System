@@ -166,43 +166,45 @@ class _ViewItemState extends State<ViewItem> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Text(
-                          'ITEM NAME',
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.deepPurple,
-                          border: Border.all(
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text(
+                            'ITEM NAME',
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.deepPurple,
-                            width: 6,
+                            border: Border.all(
+                              color: Colors.deepPurple,
+                              width: 6,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: widget.card.iname==null ? Container() : Text(
-                          '${widget.card.iname}',
-                          textAlign: TextAlign.start,
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              color: Color(0xFF090F13),
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: widget.card.iname==null ? Container() : Text(
+                            '${widget.card.iname}',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                color: Color(0xFF090F13),
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
