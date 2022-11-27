@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'registerPage.dart';
-//import 'dummy.dart';
 import 'homePage.dart';
 
 void main() => runApp(LoginPage());
@@ -19,7 +18,7 @@ class _LoginPage extends State<LoginPage> {
   void _loginSave() async {
     var msg = '';
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.
+      UserCredential userCredential = await _auth.
       signInWithEmailAndPassword(email: _email, password: _password);
       Fluttertoast.showToast(
           msg: "(☞ﾟ∀ﾟ)☞ Success",
@@ -116,7 +115,7 @@ class _LoginPage extends State<LoginPage> {
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
-            return 'Please Enter your Password !';
+            return 'Minimum 6 characters !';
           }
           if(!regex.hasMatch(value)){
             return("Please Enter Valid Password !");
@@ -166,20 +165,6 @@ class _LoginPage extends State<LoginPage> {
           child: GestureDetector(
             child: Stack(
               children: [
-                /*Container(
-            decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xff360c72),
-                              Color(0xcc360c72),
-                              Color(0x99360c72),
-                              Color(0x66360c72),
-                            ]
-                        ),
-                  ),
-                ),*/
                 Form(
                   key: _formkey,
                   child: Column(

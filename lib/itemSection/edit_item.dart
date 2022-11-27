@@ -99,9 +99,7 @@ class MapScreenState extends State<EditItem>
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
       final imagetemp = File(image.path);
-      //final imagepermanent = await saveImagePermanently(image.path);
       setState(() => this.image = imagetemp);
-      //setState(() => this.image = imagepermanent);
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -131,7 +129,6 @@ class MapScreenState extends State<EditItem>
               ),),
             fillColor: Colors.white,
             filled: true,
-            //prefixIcon: Icon(Icons.account_circle_rounded, color: Colors.purple),
             contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "${itemModel.iname}",
             border: OutlineInputBorder(
@@ -163,7 +160,6 @@ class MapScreenState extends State<EditItem>
               ),),
             fillColor: Colors.white,
             filled: true,
-            //prefixIcon: Icon(Icons.add_business_rounded, color: Colors.purple),
             contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "${itemModel.description}",
             border: OutlineInputBorder(
@@ -201,7 +197,6 @@ class MapScreenState extends State<EditItem>
               ),),
             fillColor: Colors.white,
             filled: true,
-            //prefixIcon: Icon(Icons.add_business_rounded, color: Colors.purple),
             contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Buy Price: ${itemModel.ibuy}*",
             border: OutlineInputBorder(
@@ -460,7 +455,6 @@ class MapScreenState extends State<EditItem>
     itemModel.date = date;
     itemModel.tsold = sold;
     itemModel.tprofit = profit;
-    //itemModel.odate = olddate;
     itemModel.qty = qtyEditingController.text;
     itemModel.isell = sellpriceEditingController.text;
     itemModel.ibuy = buypriceEditingController.text;
