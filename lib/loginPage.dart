@@ -14,12 +14,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPage extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
   late String _email, _password;
+  bool isLoading = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   void _loginSave() async {
-    var msg = '';
     try {
-      UserCredential userCredential = await _auth.
-      signInWithEmailAndPassword(email: _email, password: _password);
+      await _auth.signInWithEmailAndPassword(email: _email, password: _password);
+      setState(() => isLoading = false);
       Fluttertoast.showToast(
           msg: "(☞ﾟ∀ﾟ)☞ Success",
           toastLength: Toast.LENGTH_SHORT,
@@ -34,6 +34,7 @@ class _LoginPage extends State<LoginPage> {
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     }catch (e) {
+      setState(() => isLoading = false);
       Fluttertoast.showToast(
           msg: "ｰ(  ｰ̀дｰ́ )Incorrect Credentials",
           toastLength: Toast.LENGTH_SHORT,
@@ -137,6 +138,7 @@ class _LoginPage extends State<LoginPage> {
         onPressed: () {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
+            setState(() => isLoading = true);
             _loginSave();
           }
         },
@@ -159,7 +161,12 @@ class _LoginPage extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Color(0xff360c72,),
       resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
+        body: isLoading ? Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.deepPurple,
+            valueColor: AlwaysStoppedAnimation(Colors.white),
+          ),
+        ) : SingleChildScrollView(
           child: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: GestureDetector(
