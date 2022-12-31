@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 //import 'package:path/path.dart';
 import 'manageItem.dart';
 import '../models/item_model.dart';
@@ -27,6 +27,7 @@ class MapScreenState extends State<AddItem>
   final sellpriceEditingController = new TextEditingController();
   final buypriceEditingController = new TextEditingController();
   final qtyEditingController = new TextEditingController();
+  bool isLoading = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
@@ -276,7 +277,12 @@ class MapScreenState extends State<AddItem>
         title: Text('ADD NEW ITEM',
         style: GoogleFonts.poppins(),),
       ),
-      body: SingleChildScrollView(
+      body: isLoading ? Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.deepPurple,
+          valueColor: AlwaysStoppedAnimation(Colors.white),
+        ),
+      ) : SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(20.0),
           child: Form(
@@ -367,9 +373,10 @@ class MapScreenState extends State<AddItem>
                       child: MaterialButton(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         minWidth: MediaQuery.of(context).size.width * 0.6,
-                        onPressed: () {
+                        onPressed: () async{
                           if ((_formkey.currentState!.validate())&& image != null) {
                             _formkey.currentState!.save();
+                            setState(() => isLoading = true);
                             update(inameEditingController.text);
                           }
                           else if (image == null){
@@ -401,12 +408,12 @@ class MapScreenState extends State<AddItem>
             ),
           ),
         ),
-      ),);
+      ),
+    );
   }
 
   @override
   void update(String username) async{
-    var msg = '';
     try {
       uploadFile();
       //postDetailsToFireStore();
@@ -449,13 +456,15 @@ class MapScreenState extends State<AddItem>
         .collection('Items')
         .doc(date) //empty = random generate
         .set(itemModel.toMap());
+    setState(() => isLoading = false);
     Fluttertoast.showToast(
         msg: "Item Added Successfully!\n(,,･`∀･)ﾉ", toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16.0,
+    );
     Navigator.pushAndRemoveUntil((context),
         MaterialPageRoute(builder: (context) => ItemPage()), (route) => false);
   }
