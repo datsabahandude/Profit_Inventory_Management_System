@@ -23,7 +23,10 @@ class ItemCard extends StatelessWidget {
        elevation: 8,
        child: ListTile(
          tileColor: Colors.yellow[300],
-         leading: CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
+         leading: card.img == null? CircularProgressIndicator(
+           backgroundColor: Colors.deepPurple,
+           valueColor: AlwaysStoppedAnimation(Colors.white),
+         ) : CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
          title: Text('${card.iname}', style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.deepPurple, fontSize: 18, fontWeight: FontWeight.bold),),),
          subtitle: Column(
            children: [
