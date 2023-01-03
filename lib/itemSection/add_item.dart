@@ -291,17 +291,19 @@ class MapScreenState extends State<AddItem>
                 children: [
                   Stack(
                     children: [
-                      image != null ? ClipOval(child: Image.file(
+                      Center(
+                        child: image != null ?
+                        ClipOval(child: Image.file(
                         image!,
                         width: 180,
                         height: 180,
                         fit: BoxFit.cover,
                       ),
-                      ):
-                      FlutterLogo(size: 180,),
+                      ) : CircleAvatar(backgroundImage: AssetImage("images/profitinventory.png"), backgroundColor: Colors.transparent, radius: 120),
+                      ),
                       Positioned(
                           top: 120,
-                          left: 100,
+                          left: 200,
                           child: RawMaterialButton(
                             elevation: 10,
                             fillColor: Colors.white,
