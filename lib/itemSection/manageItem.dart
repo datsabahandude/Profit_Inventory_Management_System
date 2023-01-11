@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dummytest/itemSection/shimmer_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'add_item.dart';
-//import 'dummy.dart';
 import '../models/user_model.dart';
 import '../models/itemlist_Display.dart';
 import '../homePage.dart';
@@ -20,20 +17,12 @@ class ItemPage extends StatefulWidget {
   _ItemPage createState() => _ItemPage();
 }
 class _ItemPage extends State<ItemPage> {
-  //FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   UserModel userModel = UserModel();
   dumm dum = dumm();
-  final _formKey = GlobalKey<FormState>();
-  //String iname = '';
-  //String isell = '';
-  //String ibuy = '';
-  //String odate = '';
-  //String ndate = '';
-  //String qty = '';
-  //String description = '';
-List<Object> _itemlist = [];
+  List<Object> _itemlist = [];
+  bool isLoading = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -49,6 +38,14 @@ List<Object> _itemlist = [];
     getItemList();
   }
   Widget build(BuildContext context) {
+    Widget buildShimmer() {
+      return ListTile(
+        leading: ShimmerWidget.circular(width: 64, height: 64),
+        title: ShimmerWidget.rectangular(height: 16),
+        subtitle: ShimmerWidget.rectangular(height: 12),
+    );
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -89,7 +86,6 @@ List<Object> _itemlist = [];
                 ),),
               ),
             ),
-            //new Icon(Icons.add_business_rounded, color: Colors.white, size: 30,),
           ]
       ),
       body: Container(
@@ -97,17 +93,17 @@ List<Object> _itemlist = [];
         //width: 200,
         child: ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: _itemlist.length,
+            itemCount: isLoading ? 6 : _itemlist.length,
             itemBuilder: (context, index) {
-              final item = _itemlist[index];
-              return ItemCard(_itemlist[index] as dumm);
+              if (isLoading) {
+                return buildShimmer();
+              } else {
+                return ItemCard(_itemlist[index] as dumm);
+              }
             } //=> build(context),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        /*shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),*/
         backgroundColor: Colors.deepPurple,
         onPressed: () {
     Navigator.push(
@@ -119,6 +115,7 @@ List<Object> _itemlist = [];
         child: Icon(Icons.add),
       ),
     );
+
   }
   Future getItemList() async{
     var data = await FirebaseFirestore.instance
@@ -127,9 +124,9 @@ List<Object> _itemlist = [];
         .collection('Items')
         .orderBy('item name', descending: true)
         .get();
-    setState(() {
-      _itemlist = List.from(data.docs.map((doc) => dumm.fromSnapshot(doc)));
-    }
-    );
+    setState(() => isLoading = true);
+    await Future.delayed(Duration(seconds: 2), () {});
+    setState(() => _itemlist = List.from(data.docs.map((doc) => dumm.fromSnapshot(doc))));
+    setState(() => isLoading = false);
   }
 }
