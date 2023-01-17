@@ -88,18 +88,24 @@ class _ItemPage extends State<ItemPage> {
             ),
           ]
       ),
-      body: Container(
+      body: isLoading? Container(
         padding: EdgeInsets.all(20),
         //width: 200,
         child: ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: isLoading ? 6 : _itemlist.length,
+            itemCount: 6,
             itemBuilder: (context, index) {
-              if (isLoading) {
                 return buildShimmer();
-              } else {
+            } //=> build(context),
+        ),
+      ) : Container(
+        padding: EdgeInsets.all(20),
+        //width: 200,
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: _itemlist.length,
+            itemBuilder: (context, index) {
                 return ItemCard(_itemlist[index] as dumm);
-              }
             } //=> build(context),
         ),
       ),
