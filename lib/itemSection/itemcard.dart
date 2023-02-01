@@ -15,56 +15,70 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: double.infinity,
       ),
-     child: Card(
-       shadowColor: Colors.deepPurple,
-       elevation: 8,
-       child: ListTile(
-         tileColor: Colors.yellow[300],
-         leading: card.img == null? CircularProgressIndicator(
-           backgroundColor: Colors.deepPurple,
-           valueColor: AlwaysStoppedAnimation(Colors.white),
-         ) : CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
-         title: Text('${card.iname}', style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.deepPurple, fontSize: 18, fontWeight: FontWeight.bold),),),
-         subtitle: Column(
-           children: [
-             Row(
-               children: [
-                 Container(
-                   child: Text("Buy: RM ${card.buy}",
-                   style: GoogleFonts.poppins(
-                     textStyle: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.w600)
-                   ),),
-                 ),
-                 Spacer(),
-                 Container(
-                   child: Text("Sell: RM ${card.sell}",
-                     style: GoogleFonts.poppins(
-                         textStyle: TextStyle(color: Colors.green, fontWeight: FontWeight.w600)
-                     ),),
-                 )
-               ],
-             ),
-             Container(
-               child: Text("Stock: ${card.qty}",
-                 style: GoogleFonts.poppins(
-                     textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)
-                 ),),
-             ),
-           ],
-         ),
-         isThreeLine: true,
-         trailing: Icon(Icons.keyboard_arrow_right_rounded),
-         onTap: (){
-           Navigator.push(
-             context,
-               MaterialPageRoute(builder: (context) => //HomePage())
-                 ViewItem(card: card,))
-           );
-         },
-       ),
+      child: Card(
+        shadowColor: Colors.deepPurple,
+        elevation: 8,
+        child: ListTile(
+          tileColor: Colors.yellow[300],
+          leading: card.img == null
+              ? const CircularProgressIndicator(
+                  backgroundColor: Colors.deepPurple,
+                  valueColor: AlwaysStoppedAnimation(Colors.white),
+                )
+              : CircleAvatar(
+                  radius: 28, backgroundImage: NetworkImage('${card.img}')),
+          title: Text(
+            '${card.iname}',
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  color: Colors.deepPurple,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          subtitle: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Buy: RM ${card.buy}",
+                    style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Sell: RM ${card.sell}",
+                    style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.w600)),
+                  )
+                ],
+              ),
+              Text(
+                "Stock: ${card.qty}",
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w500)),
+              ),
+            ],
+          ),
+          isThreeLine: true,
+          trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => //HomePage())
+                        ViewItem(
+                          card: card,
+                        )));
+          },
+        ),
       ),
     );
   }
