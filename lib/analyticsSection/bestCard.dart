@@ -5,7 +5,7 @@ import '../models/itemlist_Display.dart';
 class BestCard extends StatelessWidget {
   final dumm card;
 
-  BestCard(this.card);
+  const BestCard(this.card);
   /*const ItemCard(
       {
         Key? key,
@@ -14,7 +14,7 @@ class BestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: double.infinity,
       ),
       child: Card(
@@ -22,24 +22,45 @@ class BestCard extends StatelessWidget {
         elevation: 8,
         child: ListTile(
           tileColor: Colors.pink[900],
-          leading: CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
-          title: card.iname==null ? Container() : Text('${card.iname}', style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.yellowAccent, fontSize: 18, fontWeight: FontWeight.bold),),),
+          leading: CircleAvatar(
+              radius: 28, backgroundImage: NetworkImage('${card.img}')),
+          title: card.iname == null
+              ? Container()
+              : Text(
+                  '${card.iname}',
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        color: Colors.yellowAccent,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
           subtitle: Column(
             children: [
               Row(
                 children: [
                   Container(
-                    child: card.sold==null ? Container() : Text("Stock Sold: ${card.sold}",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(color: Colors.purple[200], fontWeight: FontWeight.w600)
-                      ),),
+                    child: card.sold == null
+                        ? Container()
+                        : Text(
+                            "Stock Sold: ${card.sold}",
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.purple[200],
+                                    fontWeight: FontWeight.w600)),
+                          ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
-                    child: card.profit==null ? Container() : Text("Profit: RM ${card.profit}",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(color: Color(0xff13f61c), fontWeight: FontWeight.w600)
-                      ),),
+                    child: card.profit == null
+                        ? Container()
+                        : Text(
+                            "Profit: RM ${card.profit}",
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                    color: Color(0xff13f61c),
+                                    fontWeight: FontWeight.w600)),
+                          ),
                   )
                 ],
               ),

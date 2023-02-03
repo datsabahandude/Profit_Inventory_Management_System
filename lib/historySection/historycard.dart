@@ -18,19 +18,17 @@ class HistoryCard extends StatelessWidget {
         required this.iname,
       }) : super(key: key);*/
   @override
-
   Widget build(BuildContext context) {
     ran = card.qty!;
-    if(card.profit == null) {
+    if (card.profit == null) {
       message2 = 'Stock increase: +${card.qty}';
-    }
-    else {
+    } else {
       message = 'Profit: RM ${card.profit}';
       message2 = 'Stock change: ${card.qty}';
     }
 
     return Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: double.infinity,
       ),
       child: Card(
@@ -39,24 +37,36 @@ class HistoryCard extends StatelessWidget {
         child: ListTile(
           tileColor: Colors.yellow[200],
           //leading: CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
-          title: Text('${card.iname}',
+          title: Text(
+            '${card.iname}',
             style: GoogleFonts.poppins(
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                   color: Colors.deepPurple,
-                  fontSize: 18, fontWeight: FontWeight.bold),),),
-          subtitle: Text("Date: ${card.dd}/${card.mm}/${card.yy}\n${message2}",
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          subtitle: Text(
+            "Date: ${card.dd}/${card.mm}/${card.yy}\n$message2",
             style: GoogleFonts.poppins(
-                textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)
-            ),),
+                textStyle: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w500)),
+          ),
           isThreeLine: true,
-          trailing: Text(message,
+          trailing: Text(
+            message,
             style: GoogleFonts.poppins(
-                textStyle: TextStyle(color: Colors.green, fontWeight: FontWeight.w700)
-            ),),
-          onTap: ()
-          {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => ViewHistory(card: card,)));
-            },
+                textStyle: const TextStyle(
+                    color: Colors.green, fontWeight: FontWeight.w700)),
+          ),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ViewHistory(
+                          card: card,
+                        )));
+          },
         ),
       ),
     );

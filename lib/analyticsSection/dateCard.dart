@@ -11,16 +11,15 @@ class DateCard extends StatelessWidget {
   DateCard(this.card);
   @override
   Widget build(BuildContext context) {
-    if(card.profit == null) {
+    if (card.profit == null) {
       message2 = 'Stock increase: +${card.qty}';
-    }
-    else {
+    } else {
       message = 'Profit: RM ${card.iprofit}';
       message2 = 'Stock change: ${card.qty}';
     }
 
     return Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: double.infinity,
       ),
       child: Card(
@@ -29,20 +28,28 @@ class DateCard extends StatelessWidget {
         child: ListTile(
           tileColor: Colors.yellow[200],
           //leading: CircleAvatar(radius: 28, backgroundImage: NetworkImage('${card.img}')),
-          title: Text('${card.iname}',
+          title: Text(
+            '${card.iname}',
             style: GoogleFonts.poppins(
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                   color: Colors.deepPurple,
-                  fontSize: 18, fontWeight: FontWeight.bold),),),
-          subtitle: Text("Year: ${card.yy}\n Month: ${card.mm}\n${message2}",
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          subtitle: Text(
+            "Year: ${card.yy}\n Month: ${card.mm}\n$message2",
             style: GoogleFonts.poppins(
-                textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)
-            ),),
+                textStyle: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w500)),
+          ),
           isThreeLine: true,
-          trailing: Text(message,
+          trailing: Text(
+            message,
             style: GoogleFonts.poppins(
-                textStyle: TextStyle(color: Colors.green, fontWeight: FontWeight.w700)
-            ),),
+                textStyle: const TextStyle(
+                    color: Colors.green, fontWeight: FontWeight.w700)),
+          ),
           onTap: () {},
         ),
       ),

@@ -18,13 +18,14 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPage createState() => _RegisterPage();
 }
+
 class _RegisterPage extends State<RegisterPage> {
   final _formkey = GlobalKey<FormState>();
-  final emailEditingController = new TextEditingController();
-  final usernameEditingController = new TextEditingController();
-  final shopnameEditingController = new TextEditingController();
-  final passEditingController = new TextEditingController();
-  final cpassEditingController = new TextEditingController();
+  final emailEditingController = TextEditingController();
+  final usernameEditingController = TextEditingController();
+  final shopnameEditingController = TextEditingController();
+  final passEditingController = TextEditingController();
+  final cpassEditingController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
@@ -37,32 +38,32 @@ class _RegisterPage extends State<RegisterPage> {
         validator: (value) {
           if (value!.isEmpty) {
             return 'Please Enter your Email !';
-          }
-          else if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
-            return("Please Enter a valid Email");
+          } else if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid Email");
           }
         },
-        onSaved: (value){
+        onSaved: (value) {
           emailEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
             errorStyle: GoogleFonts.poppins(
-              textStyle: TextStyle(
-              fontSize: 12.0,
-              color: Colors.yellow,
-              fontWeight: FontWeight.w700,
-            ),),
+              textStyle: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.yellow,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: Icon(Icons.mail, color: Colors.purple),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            prefixIcon: const Icon(Icons.mail, color: Colors.purple),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Enter Your Email",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            )
-        ));
+            )));
     final usernameField = TextFormField(
         autofocus: false,
         controller: usernameEditingController,
@@ -72,27 +73,28 @@ class _RegisterPage extends State<RegisterPage> {
             return 'Please Enter your Username !';
           }
         },
-        onSaved: (value){
+        onSaved: (value) {
           usernameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
             errorStyle: GoogleFonts.poppins(
-              textStyle: TextStyle(
-              fontSize: 12.0,
-              color: Colors.yellow,
-              fontWeight: FontWeight.w700,
-            ),),
+              textStyle: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.yellow,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: Icon(Icons.account_circle_rounded, color: Colors.purple),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            prefixIcon:
+                const Icon(Icons.account_circle_rounded, color: Colors.purple),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Enter Your Username",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            )
-        ));
+            )));
     final shopnameField = TextFormField(
         autofocus: false,
         controller: shopnameEditingController,
@@ -102,62 +104,63 @@ class _RegisterPage extends State<RegisterPage> {
             return 'Please Enter your Shop name !';
           }
         },
-        onSaved: (value){
+        onSaved: (value) {
           shopnameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
             errorStyle: GoogleFonts.poppins(
-              textStyle: TextStyle(
-              fontSize: 12.0,
-              color: Colors.yellow,
-              fontWeight: FontWeight.w700,
-            ),),
+              textStyle: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.yellow,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: Icon(Icons.add_business_rounded, color: Colors.purple),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            prefixIcon:
+                const Icon(Icons.add_business_rounded, color: Colors.purple),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Enter Your Store/Shop name",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            )
-        ));
+            )));
     final passField = TextFormField(
         autofocus: false,
         controller: passEditingController,
         obscureText: true,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{6,}$');
+          RegExp regex = RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
             return 'Please Enter your Password !';
           }
-          if(!regex.hasMatch(value)){
-            return("Please Enter Valid Password !");
+          if (!regex.hasMatch(value)) {
+            return ("Please Enter Valid Password !");
           }
           return null;
         },
-        onSaved: (value){
+        onSaved: (value) {
           passEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
             errorStyle: GoogleFonts.poppins(
-              textStyle: TextStyle(
-              fontSize: 12.0,
-              color: Colors.yellow,
-              fontWeight: FontWeight.w700,
-            ),),
+              textStyle: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.yellow,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: Icon(Icons.vpn_key, color: Colors.purple),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            prefixIcon: const Icon(Icons.vpn_key, color: Colors.purple),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Create Password",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            )
-        ));
+            )));
     final cpassField = TextFormField(
         autofocus: false,
         controller: cpassEditingController,
@@ -168,35 +171,35 @@ class _RegisterPage extends State<RegisterPage> {
           }
           return null;
         },
-        onSaved: (value){
+        onSaved: (value) {
           cpassEditingController.text = value!;
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
             errorStyle: GoogleFonts.poppins(
-              textStyle: TextStyle(
-              fontSize: 12.0,
-              color: Colors.yellow,
-              fontWeight: FontWeight.w700,
-            ),),
+              textStyle: const TextStyle(
+                fontSize: 12.0,
+                color: Colors.yellow,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: Icon(Icons.vpn_key, color: Colors.purple),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            prefixIcon: const Icon(Icons.vpn_key, color: Colors.purple),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Confirm Password",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            )
-        ));
+            )));
     final signUpBtn = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
       color: Colors.white,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () async{
+        onPressed: () async {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
             signUp(emailEditingController.text, passEditingController.text);
@@ -206,9 +209,11 @@ class _RegisterPage extends State<RegisterPage> {
           "SIGN UP",
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-              fontSize: 22, color: Colors.purple, fontWeight: FontWeight.bold
-          ),),
+            textStyle: const TextStyle(
+                fontSize: 22,
+                color: Colors.purple,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
@@ -216,33 +221,51 @@ class _RegisterPage extends State<RegisterPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('Create New Account',
-        style: GoogleFonts.poppins(),),
+        title: Text(
+          'Create New Account',
+          style: GoogleFonts.poppins(),
+        ),
       ),
       body: Container(
-        padding: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(20.0),
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xff360c72),
-                  Color(0xcc360c72),
-                  Color(0x99360c72),
-                  Color(0x66360c72),
-                ]
-            )
-        ),
+              Color(0xff360c72),
+              Color(0xcc360c72),
+              Color(0x99360c72),
+              Color(0x66360c72),
+            ])),
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              emailField, SizedBox(height: 20.0,),
-              usernameField, SizedBox(height: 20.0,),
-              shopnameField, SizedBox(height: 20.0,),
-              passField, SizedBox(height: 20.0,),
-              cpassField, SizedBox(height: 20.0,),
-              signUpBtn, SizedBox(height: 20.0,),
+              emailField,
+              const SizedBox(
+                height: 20.0,
+              ),
+              usernameField,
+              const SizedBox(
+                height: 20.0,
+              ),
+              shopnameField,
+              const SizedBox(
+                height: 20.0,
+              ),
+              passField,
+              const SizedBox(
+                height: 20.0,
+              ),
+              cpassField,
+              const SizedBox(
+                height: 20.0,
+              ),
+              signUpBtn,
+              const SizedBox(
+                height: 20.0,
+              ),
             ],
           ),
         ),
@@ -250,26 +273,24 @@ class _RegisterPage extends State<RegisterPage> {
     );
   }
 
-  void signUp(String email, String password) async{
+  void signUp(String email, String password) async {
     var msg = '';
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       postDetailsToFireStore();
-
-    } on FirebaseAuthException catch (e)
-    {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'wea-password') {
         print('Provided password is weak');
       } else if (e.code == 'Email Existed') ;
       {
         print('Account Existed');
       }
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
+
   postDetailsToFireStore() async {
     var date = DateTime.now().toString();
     var dateparse = DateTime.parse(date);
@@ -288,7 +309,7 @@ class _RegisterPage extends State<RegisterPage> {
     userModel.shopname = shopnameEditingController.text;
     userModel.joindate = formattedDate;
     final Ref = await firebaseFirestore.collection("users").doc(user.uid);
-        Ref.set(userModel.toMap());
+    Ref.set(userModel.toMap());
     Ref.collection('Total Profit').doc('1').set(profitModel.toMap());
     Fluttertoast.showToast(
         msg: "Registration Successful",
@@ -297,8 +318,7 @@ class _RegisterPage extends State<RegisterPage> {
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
     Navigator.pushAndRemoveUntil((context),
         MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
   }

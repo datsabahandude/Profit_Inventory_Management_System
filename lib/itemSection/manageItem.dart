@@ -41,7 +41,7 @@ class _ItemPage extends State<ItemPage> {
 
   Widget build(BuildContext context) {
     Widget buildShimmer() {
-      return ListTile(
+      return const ListTile(
         leading: ShimmerWidget.circular(width: 64, height: 64),
         title: ShimmerWidget.rectangular(height: 16),
         subtitle: ShimmerWidget.rectangular(height: 12),
@@ -51,15 +51,15 @@ class _ItemPage extends State<ItemPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-          leading: new IconButton(
-            icon: Icon(
+          leading: IconButton(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30,
             ),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
             },
           ),
           backgroundColor: Colors.deepPurple,
@@ -84,7 +84,7 @@ class _ItemPage extends State<ItemPage> {
                   : Text(
                       "${userModel.shopname}",
                       style: GoogleFonts.spaceMono(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 20,
                             color: Colors.yellowAccent,
                             //decoration: TextDecoration.underline,
@@ -97,7 +97,7 @@ class _ItemPage extends State<ItemPage> {
           ]),
       body: isLoading
           ? Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               //width: 200,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
@@ -108,7 +108,7 @@ class _ItemPage extends State<ItemPage> {
                   ),
             )
           : Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               //width: 200,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
@@ -124,7 +124,7 @@ class _ItemPage extends State<ItemPage> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddItem()));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -137,7 +137,7 @@ class _ItemPage extends State<ItemPage> {
         .orderBy('item name', descending: true)
         .get();
     setState(() => isLoading = true);
-    await Future.delayed(Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 2), () {});
     setState(() =>
         _itemlist = List.from(data.docs.map((doc) => dumm.fromSnapshot(doc))));
     setState(() => isLoading = false);
