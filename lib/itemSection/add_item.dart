@@ -320,10 +320,6 @@ class MapScreenState extends State<AddItem>
                             child: RawMaterialButton(
                               elevation: 10,
                               fillColor: Colors.white,
-                              child: const Icon(
-                                Icons.add_a_photo_outlined,
-                                color: Colors.purple,
-                              ),
                               padding: const EdgeInsets.all(15),
                               shape: const CircleBorder(),
                               onPressed: () {
@@ -409,6 +405,10 @@ class MapScreenState extends State<AddItem>
                                       );
                                     });
                               },
+                              child: const Icon(
+                                Icons.add_a_photo_outlined,
+                                color: Colors.purple,
+                              ),
                             )),
                       ],
                     ),
@@ -460,6 +460,8 @@ class MapScreenState extends State<AddItem>
                                   fontSize: 16.0);
                             }
                           },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
                           child: Text(
                             "Add Item",
                             textAlign: TextAlign.center,
@@ -470,8 +472,6 @@ class MapScreenState extends State<AddItem>
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)),
                         ),
                       ),
                     ),
