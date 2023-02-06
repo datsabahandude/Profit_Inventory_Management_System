@@ -135,6 +135,7 @@ class _LoginPage extends State<LoginPage> {
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
       color: Colors.white,
+      clipBehavior: Clip.antiAlias,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width * 0.6,
@@ -161,84 +162,89 @@ class _LoginPage extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(
-        0xff360c72,
-      ),
-      resizeToAvoidBottomInset: false,
-      body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.deepPurple,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-              ),
-            )
-          : SingleChildScrollView(
-              child: AnnotatedRegion<SystemUiOverlayStyle>(
-                value: SystemUiOverlayStyle.light,
-                child: GestureDetector(
-                  child: Stack(
-                    children: [
-                      Form(
-                        key: _formkey,
-                        child: Column(
-                          children: [
-                            const Center(
-                              child: CircleAvatar(
-                                backgroundImage:
-                                    AssetImage("images/profitinventory.png"),
-                                backgroundColor: Colors.transparent,
-                                radius: 140,
-                              ),
-                            ),
-                            _buildEmail(),
-                            const SizedBox(height: 5),
-                            _buildPassword(),
-                            const SizedBox(height: 10),
-                            _buildLogin(),
-                            const Padding(padding: EdgeInsets.all(5.0)),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  "Don't have an account? ",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                        color: Colors.white),
-                                  ),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
+        resizeToAvoidBottomInset: false,
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.deepPurple,
+                  valueColor: AlwaysStoppedAnimation(Colors.white),
+                ),
+              )
+            : SingleChildScrollView(
+                child: AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: SystemUiOverlayStyle.light,
+                  child: GestureDetector(
+                    child: Stack(
+                      children: [
+                        Form(
+                          key: _formkey,
+                          child: Column(
+                            children: [
+                              const Center(
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage("images/profitinventory.png"),
+                                  backgroundColor: Colors.transparent,
+                                  radius: 140,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const RegisterPage()));
-                                  },
-                                  child: Text(
-                                    "Sign Up",
+                              ),
+                              _buildEmail(),
+                              const SizedBox(height: 5),
+                              _buildPassword(),
+                              const SizedBox(height: 10),
+                              _buildLogin(),
+                              const Padding(padding: EdgeInsets.all(5.0)),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    "Don't have an account? ",
                                     style: GoogleFonts.poppins(
                                       textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Colors.yellowAccent,
-                                      ),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Colors.white),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const RegisterPage()));
+                                    },
+                                    child: Text(
+                                      "Sign Up",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: Colors.yellowAccent,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }

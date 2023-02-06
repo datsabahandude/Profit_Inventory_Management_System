@@ -179,99 +179,104 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
-            },
-            child: userModel.username == null
-                ? Container()
-                : Text(
-                    "${userModel.username} ",
-                    style: GoogleFonts.spaceMono(
-                      textStyle: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.yellowAccent,
-                          decorationColor: Colors.white,
-                          fontWeight: FontWeight.w800),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
+              child: userModel.username == null
+                  ? Container()
+                  : Text(
+                      "${userModel.username} ",
+                      style: GoogleFonts.spaceMono(
+                        textStyle: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.yellowAccent,
+                            decorationColor: Colors.white,
+                            fontWeight: FontWeight.w800),
+                      ),
                     ),
+            ),
+            const Icon(
+              Icons.account_circle_rounded,
+              color: Colors.white,
+              size: 30,
+            ),
+          ],
+          backgroundColor: const Color(0xff360c72),
+          elevation: 0.0,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        body: Container(
+          padding: const EdgeInsets.all(20.0),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Color(0xff360c72),
+                Color(0xcc360c72),
+                Color(0x99360c72),
+                Color(0x66360c72),
+              ])),
+          child: Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                const Center(
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage("images/profitinventory.png"),
+                    backgroundColor: Colors.transparent,
+                    radius: 140,
                   ),
-          ),
-          const Icon(
-            Icons.account_circle_rounded,
-            color: Colors.white,
-            size: 30,
-          ),
-        ],
-        backgroundColor: const Color(0xff360c72),
-        elevation: 0.0,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      body: Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xff360c72),
-              Color(0xcc360c72),
-              Color(0x99360c72),
-              Color(0x66360c72),
-            ])),
-        child: Form(
-          key: _formkey,
-          child: Column(
-            children: [
-              const Center(
-                child: CircleAvatar(
-                  backgroundImage: AssetImage("images/profitinventory.png"),
-                  backgroundColor: Colors.transparent,
-                  radius: 140,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              _manageItem(),
-              const SizedBox(
-                height: 10,
-              ),
-              _saleshistory(),
-              const SizedBox(
-                height: 10,
-              ),
-              _analytics(),
-              const SizedBox(
-                height: 10,
-              ),
-              _feedback(),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                _manageItem(),
+                const SizedBox(
+                  height: 10,
+                ),
+                _saleshistory(),
+                const SizedBox(
+                  height: 10,
+                ),
+                _analytics(),
+                const SizedBox(
+                  height: 10,
+                ),
+                _feedback(),
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        floatingActionButton: FloatingActionButton.extended(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          icon: const Icon(Icons.exit_to_app_outlined),
+          label: Text(
+            'Logout',
+            style: GoogleFonts.poppins(),
+          ),
+          backgroundColor: Colors.deepPurple,
+          onPressed: () => {
+            setState(() {
+              FirebaseAuth.instance.signOut();
+            }),
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()))
+          },
         ),
-        icon: const Icon(Icons.exit_to_app_outlined),
-        label: Text(
-          'Logout',
-          style: GoogleFonts.poppins(),
-        ),
-        backgroundColor: Colors.deepPurple,
-        onPressed: () => {
-          setState(() {
-            FirebaseAuth.instance.signOut();
-          }),
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage()))
-        },
       ),
     );
   }
