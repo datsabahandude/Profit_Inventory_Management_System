@@ -13,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 //import 'package:path/path.dart';
 import 'manageItem.dart';
 import '../models/item_model.dart';
+import 'package:lottie/lottie.dart';
 
 class AddItem extends StatefulWidget {
   const AddItem({super.key});
@@ -285,11 +286,8 @@ class MapScreenState extends State<AddItem>
         ),
       ),
       body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.deepPurple,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-              ),
+          ? Center(
+              child: Lottie.asset("images/loading-files.json"),
             )
           : SingleChildScrollView(
               child: Container(
