@@ -217,16 +217,6 @@ class _HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         body: Container(
           padding: const EdgeInsets.all(20.0),
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Color(0xff360c72),
-                Color(0xcc360c72),
-                Color(0x99360c72),
-                Color(0x66360c72),
-              ])),
           child: Form(
             key: _formkey,
             child: Column(
