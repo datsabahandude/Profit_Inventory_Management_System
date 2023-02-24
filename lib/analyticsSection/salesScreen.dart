@@ -83,22 +83,13 @@ class _SalesScreenState extends State<SalesScreen> {
     return Center(
       child: Container(
         padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xff360c72),
-              Color(0xcc360c72),
-              Color(0x99360c72),
-              Color(0x66360c72),
-            ])),
         child: Form(
           //key: _formkey,
           child: Column(
             children: [
               Container(
                 decoration: BoxDecoration(
+                  color: Colors.amberAccent,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 padding: const EdgeInsets.all(10),
@@ -108,7 +99,6 @@ class _SalesScreenState extends State<SalesScreen> {
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 18.0,
-                      color: Colors.yellow,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -123,7 +113,6 @@ class _SalesScreenState extends State<SalesScreen> {
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 18.0,
-                        color: Colors.yellow,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -156,7 +145,6 @@ class _SalesScreenState extends State<SalesScreen> {
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 18.0,
-                        color: Colors.yellow,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

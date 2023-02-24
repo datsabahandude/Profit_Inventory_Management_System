@@ -141,16 +141,6 @@ class MapScreenState extends State<FeedbackPage> {
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xff360c72),
-              Color(0xcc360c72),
-              Color(0x99360c72),
-              Color(0x66360c72),
-            ])),
         child: Form(
           key: _formkey,
           child: Column(
@@ -166,8 +156,8 @@ class MapScreenState extends State<FeedbackPage> {
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 18.0,
-                      color: Colors.yellow,
-                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
                 ),

@@ -24,6 +24,7 @@ dependencies:
   flutter_speed_dial: ^6.0.0
   google_fonts: ^3.0.1
   shimmer: ^2.0.0
+  lottie: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -38,7 +39,7 @@ flutter:
 
   uses-material-design: true
   assets:
-  - images/profitinventory.png
+  - images/
 
   fonts:
     - family: Pacifico

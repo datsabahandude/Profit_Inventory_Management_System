@@ -13,8 +13,11 @@ import 'package:image_picker/image_picker.dart';
 //import 'package:path/path.dart';
 import 'manageItem.dart';
 import '../models/item_model.dart';
+import 'package:lottie/lottie.dart';
 
 class AddItem extends StatefulWidget {
+  const AddItem({super.key});
+
   @override
   MapScreenState createState() => MapScreenState();
 }
@@ -28,7 +31,7 @@ class MapScreenState extends State<AddItem>
   final buypriceEditingController = TextEditingController();
   final qtyEditingController = TextEditingController();
   bool isLoading = false;
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -40,7 +43,7 @@ class MapScreenState extends State<AddItem>
 
   Future uploadFile() async {
     var date = DateTime.now().toString();
-    final path = '${user!.uid}/items/${date}';
+    final path = '${user!.uid}/items/$date';
     final file = File(image!.path);
     final ref = FirebaseStorage.instance.ref().child(path);
     uploadTask = ref.putFile(file);
@@ -55,7 +58,6 @@ class MapScreenState extends State<AddItem>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -263,7 +265,7 @@ class MapScreenState extends State<AddItem>
               borderRadius: BorderRadius.circular(10),
             )));
     return Scaffold(
-      backgroundColor: Colors.deepPurpleAccent[400],
+      // backgroundColor: Colors.deepPurpleAccent[400],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
@@ -284,15 +286,12 @@ class MapScreenState extends State<AddItem>
         ),
       ),
       body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.deepPurple,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-              ),
+          ? Center(
+              child: Lottie.asset("images/loading-files.json"),
             )
           : SingleChildScrollView(
               child: Container(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(30.0),
                 child: Form(
                   key: _formkey,
                   child: Column(children: [
@@ -435,42 +434,40 @@ class MapScreenState extends State<AddItem>
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      child: Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                          minWidth: MediaQuery.of(context).size.width * 0.6,
-                          onPressed: () async {
-                            if ((_formkey.currentState!.validate()) &&
-                                image != null) {
-                              _formkey.currentState!.save();
-                              setState(() => isLoading = true);
-                              update(inameEditingController.text);
-                            } else if (image == null) {
-                              Fluttertoast.showToast(
-                                  msg: "Please Upload an Image!",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
-                            }
-                          },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Text(
-                            "Add Item",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xff360c72),
-                                  fontWeight: FontWeight.bold),
-                            ),
+                    Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white,
+                      child: MaterialButton(
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        minWidth: MediaQuery.of(context).size.width * 0.6,
+                        onPressed: () async {
+                          if ((_formkey.currentState!.validate()) &&
+                              image != null) {
+                            _formkey.currentState!.save();
+                            setState(() => isLoading = true);
+                            update(inameEditingController.text);
+                          } else if (image == null) {
+                            Fluttertoast.showToast(
+                                msg: "Please Upload an Image!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: Text(
+                          "Add Item",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                fontSize: 20,
+                                color: Color(0xff360c72),
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -482,7 +479,6 @@ class MapScreenState extends State<AddItem>
     );
   }
 
-  @override
   void update(String username) async {
     try {
       uploadFile();
