@@ -220,7 +220,9 @@ class _RegisterPage extends State<RegisterPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
         title: Text(
           'Create New Account',
           style: GoogleFonts.poppins(),

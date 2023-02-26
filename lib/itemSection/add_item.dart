@@ -279,7 +279,9 @@ class MapScreenState extends State<AddItem>
                 MaterialPageRoute(builder: (context) => const ItemPage()));
           },
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
         title: Text(
           'ADD NEW ITEM',
           style: GoogleFonts.poppins(),

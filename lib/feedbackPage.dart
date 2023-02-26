@@ -133,7 +133,9 @@ class MapScreenState extends State<FeedbackPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
         title: Text(
           'SEND FEEDBACK',
           style: GoogleFonts.poppins(),

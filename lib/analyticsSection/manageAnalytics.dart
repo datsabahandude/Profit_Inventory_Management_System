@@ -33,7 +33,9 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                   MaterialPageRoute(builder: (context) => const HomePage()));
             },
           ),
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: const Color(
+            0xff360c72,
+          ),
           title: Text(
             'ANALYTICS REPORT',
             style: GoogleFonts.poppins(),
@@ -52,7 +54,9 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
           ),
           child: NavigationBar(
             height: 60,
-            backgroundColor: Colors.deepPurple.shade500,
+            backgroundColor: const Color(
+              0xff360c72,
+            ),
             selectedIndex: index,
             onDestinationSelected: (index) =>
                 setState(() => this.index = index),

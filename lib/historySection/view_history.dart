@@ -73,7 +73,9 @@ class _ViewHistoryState extends State<ViewHistory> {
                 MaterialPageRoute(builder: (context) => const HistoryPage()));
           },
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
         title: Text(
           'SELECTED RECORD',
           style: GoogleFonts.poppins(),

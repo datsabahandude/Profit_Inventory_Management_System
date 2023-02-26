@@ -62,7 +62,9 @@ class _ItemPage extends State<ItemPage> {
                   MaterialPageRoute(builder: (context) => const HomePage()));
             },
           ),
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: const Color(
+            0xff360c72,
+          ),
           title: Text(
             'MANAGE ITEM',
             style: GoogleFonts.poppins(),

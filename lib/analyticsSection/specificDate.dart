@@ -48,7 +48,9 @@ class _DatePage extends State<DatePage> {
                 MaterialPageRoute(builder: (context) => const AnalyticsPage()));
           },
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
         title: Text(
           'Year: ${widget.year} Month: ${widget.month}',
           style: GoogleFonts.poppins(),

@@ -257,7 +257,9 @@ class _HomePageState extends State<HomePage> {
             'Logout',
             style: GoogleFonts.poppins(),
           ),
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: const Color(
+            0xff360c72,
+          ),
           onPressed: () => {
             setState(() {
               FirebaseAuth.instance.signOut();

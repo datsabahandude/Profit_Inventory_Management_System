@@ -294,7 +294,9 @@ class MapScreenState extends State<EditItem>
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color(
+          0xff360c72,
+        ),
         title: Text(
           'UPDATE ITEM DETAILS',
           style: GoogleFonts.poppins(),

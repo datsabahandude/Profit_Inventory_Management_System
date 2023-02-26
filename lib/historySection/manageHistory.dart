@@ -50,7 +50,9 @@ class _ItemPage extends State<HistoryPage> {
                   MaterialPageRoute(builder: (context) => const HomePage()));
             },
           ),
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: const Color(
+            0xff360c72,
+          ),
           title: Text(
             'HISTORY',
             style: GoogleFonts.poppins(),
