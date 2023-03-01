@@ -103,7 +103,7 @@ class _ItemPage extends State<ItemPage> {
               //width: 200,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: 6,
+                  itemCount: 8,
                   itemBuilder: (context, index) {
                     return buildShimmer();
                   } //=> build(context),
@@ -123,8 +123,8 @@ class _ItemPage extends State<ItemPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurple,
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddItem()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddItem()));
         },
         child: const Icon(Icons.add),
       ),
