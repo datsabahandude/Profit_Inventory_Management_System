@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dummytest/models/profit_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:dummytest/homePage.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'loginPage.dart';
 import 'models/user_model.dart';
@@ -21,12 +20,13 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPage extends State<RegisterPage> {
   final _formkey = GlobalKey<FormState>();
+  bool isLoading = false;
   final emailEditingController = TextEditingController();
   final usernameEditingController = TextEditingController();
   final shopnameEditingController = TextEditingController();
   final passEditingController = TextEditingController();
   final cpassEditingController = TextEditingController();
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   @override
@@ -198,10 +198,11 @@ class _RegisterPage extends State<RegisterPage> {
       color: Colors.white,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width * 0.5,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
+            setState(() => isLoading = true);
             signUp(emailEditingController.text, passEditingController.text);
           }
         },
@@ -211,85 +212,116 @@ class _RegisterPage extends State<RegisterPage> {
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 22,
-                color: Colors.purple,
+                color: Color(0xff360c72),
                 fontWeight: FontWeight.bold),
           ),
         ),
       ),
     );
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: const Color(
-          0xff360c72,
-        ),
-        title: Text(
-          'Create New Account',
-          style: GoogleFonts.poppins(),
-        ),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xff360c72),
-              Color(0xcc360c72),
-              Color(0x99360c72),
-              Color(0x66360c72),
-            ])),
-        child: Form(
-          key: _formkey,
-          child: Column(
-            children: [
-              emailField,
-              const SizedBox(
-                height: 20.0,
+    return isLoading
+        ? const Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.deepPurple,
+              valueColor: AlwaysStoppedAnimation(Colors.white),
+            ),
+          )
+        : Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              backgroundColor: const Color(
+                0xff360c72,
               ),
-              usernameField,
-              const SizedBox(
-                height: 20.0,
+              title: Text(
+                'Create New Account',
+                style: GoogleFonts.poppins(),
               ),
-              shopnameField,
-              const SizedBox(
-                height: 20.0,
+            ),
+            body: Container(
+              padding: const EdgeInsets.all(20.0),
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    Color(0xff360c72),
+                    Color(0xcc360c72),
+                    Color(0x99360c72),
+                    Color(0x66360c72),
+                  ])),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    emailField,
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    usernameField,
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    shopnameField,
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    passField,
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    cpassField,
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    signUpBtn,
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                  ],
+                ),
               ),
-              passField,
-              const SizedBox(
-                height: 20.0,
-              ),
-              cpassField,
-              const SizedBox(
-                height: 20.0,
-              ),
-              signUpBtn,
-              const SizedBox(
-                height: 20.0,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 
   void signUp(String email, String password) async {
     var msg = '';
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       postDetailsToFireStore();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wea-password') {
-        print('Provided password is weak');
+        Fluttertoast.showToast(
+            msg: "ｰ(  ｰ̀дｰ́ ) Weak Password",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.redAccent,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        setState(() => isLoading = false);
       } else if (e.code == 'Email Existed') ;
       {
-        print('Account Existed');
+        Fluttertoast.showToast(
+            msg: "ｰ(  ｰ̀дｰ́ ) Account Already Exist",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.redAccent,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        setState(() => isLoading = false);
       }
     } catch (e) {
-      print(e);
+      Fluttertoast.showToast(
+          msg: "Something Went Wrong",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.redAccent,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      setState(() => isLoading = false);
     }
   }
 
@@ -321,6 +353,7 @@ class _RegisterPage extends State<RegisterPage> {
         backgroundColor: Colors.green,
         textColor: Colors.white,
         fontSize: 16.0);
+    setState(() => isLoading = false);
     Navigator.pushAndRemoveUntil((context),
         MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
   }

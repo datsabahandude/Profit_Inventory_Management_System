@@ -138,7 +138,7 @@ class _LoginPage extends State<LoginPage> {
       clipBehavior: Clip.antiAlias,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width * 0.6,
+        minWidth: MediaQuery.of(context).size.width * 0.5,
         onPressed: () {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
@@ -188,6 +188,9 @@ class _LoginPage extends State<LoginPage> {
                           key: _formkey,
                           child: Column(
                             children: [
+                              const SizedBox(
+                                height: 50,
+                              ),
                               const Center(
                                 child: CircleAvatar(
                                   backgroundImage:
