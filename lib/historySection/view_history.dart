@@ -54,7 +54,7 @@ class _ViewHistoryState extends State<ViewHistory> {
     if (widget.card.profit == null) {
       message2 = 'Stock increase: +${widget.card.qty}';
     } else {
-      message = 'Profit: RM ${widget.card.profit}';
+      message = 'Profit: \$ ${widget.card.profit}';
       message2 = 'Stock change: ${widget.card.qty}';
       newprofit = double.parse(tprofit) - double.parse(widget.card.profit!);
       num = 1;

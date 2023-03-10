@@ -257,7 +257,7 @@ class _ViewItemState extends State<ViewItem> {
                             child: itemModel.ibuy == null
                                 ? Container()
                                 : Text(
-                                    'RM ${itemModel.ibuy}',
+                                    '\$ ${itemModel.ibuy}',
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.poppins(
                                       textStyle: const TextStyle(
@@ -300,7 +300,7 @@ class _ViewItemState extends State<ViewItem> {
                             child: itemModel.isell == null
                                 ? Container()
                                 : Text(
-                                    'RM ${itemModel.isell}',
+                                    '\$ ${itemModel.isell}',
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.poppins(
                                       textStyle: const TextStyle(

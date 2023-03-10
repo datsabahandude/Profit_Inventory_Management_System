@@ -23,7 +23,7 @@ class HistoryCard extends StatelessWidget {
     if (card.profit == null) {
       message2 = 'Stock increase: +${card.qty}';
     } else {
-      message = 'Profit: RM ${card.profit}';
+      message = 'Profit: \$ ${card.profit}';
       message2 = 'Stock change: ${card.qty}';
     }
 
