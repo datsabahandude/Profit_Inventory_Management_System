@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dummytest/homePage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'models/feedback_model.dart';
 import 'models/user_model.dart';
 
@@ -140,6 +141,24 @@ class MapScreenState extends State<FeedbackPage> {
           'SEND FEEDBACK',
           style: GoogleFonts.poppins(),
         ),
+        actions: [
+          TextButton.icon(
+              onPressed: () {
+                _launchUrl();
+              },
+              icon: const Text(
+                'GitHub',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+              label:
+                  // ClipOval(
+                  //   child: Image.asset('images/github-logo.png', fit: BoxFit.cover),
+                  // ),
+                  const CircleAvatar(
+                backgroundImage: AssetImage('images/github-logo.png'),
+                backgroundColor: Colors.white,
+              ))
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
@@ -230,5 +249,13 @@ class MapScreenState extends State<FeedbackPage> {
         (context),
         MaterialPageRoute(builder: (context) => const HomePage()),
         (route) => false);
+  }
+
+  /// Github Profile
+  Future<void> _launchUrl() async {
+    final Uri _url = Uri.parse('https://github.com/datsabahandude');
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }
