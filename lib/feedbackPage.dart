@@ -111,7 +111,7 @@ class MapScreenState extends State<FeedbackPage> {
       color: Colors.white,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width * 0.5,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
@@ -124,7 +124,7 @@ class MapScreenState extends State<FeedbackPage> {
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 20,
-                color: Colors.purple,
+                color: Color(0xff360c72),
                 fontWeight: FontWeight.bold),
           ),
         ),

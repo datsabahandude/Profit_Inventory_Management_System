@@ -125,11 +125,11 @@ class _SalesScreenState extends State<SalesScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: DropdownButton<String>(
-                      dropdownColor: Colors.deepPurple,
+                      dropdownColor: Colors.white,
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 18.0,
-                          color: Colors.yellow,
+                          color: Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -157,11 +157,11 @@ class _SalesScreenState extends State<SalesScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: DropdownButton<String>(
-                      dropdownColor: Colors.deepPurple,
+                      dropdownColor: Colors.white,
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 18.0,
-                          color: Colors.yellow,
+                          color: Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -246,7 +246,7 @@ class _SalesScreenState extends State<SalesScreen> {
                     borderRadius: BorderRadius.circular(15),
                     color: const Color(0xff13f61c)),
                 child: Text(
-                  'Total Profit: RM $tprofit',
+                  'Total Profit: \$ $tprofit',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
