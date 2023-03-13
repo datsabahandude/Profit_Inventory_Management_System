@@ -44,7 +44,7 @@ class ItemCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Buy: RM ${card.buy}",
+                    "Buy: \$ ${card.buy}",
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                             color: Colors.redAccent,
@@ -52,7 +52,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Sell: RM ${card.sell}",
+                    "Sell: \$ ${card.sell}",
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                             color: Colors.green, fontWeight: FontWeight.w600)),

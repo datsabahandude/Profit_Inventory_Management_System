@@ -55,7 +55,7 @@ class BestCard extends StatelessWidget {
                     child: card.profit == null
                         ? Container()
                         : Text(
-                            "Profit: RM ${card.profit}",
+                            "Profit: \$ ${card.profit}",
                             style: GoogleFonts.poppins(
                                 textStyle: const TextStyle(
                                     color: Color(0xff13f61c),

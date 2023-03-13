@@ -22,7 +22,7 @@ class ViewHistory extends StatefulWidget {
 }
 
 class _ViewHistoryState extends State<ViewHistory> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   ProfitModel profitModel = ProfitModel();
@@ -32,6 +32,7 @@ class _ViewHistoryState extends State<ViewHistory> {
   String tprofit = '0';
   var num = 0;
   double newprofit = 0;
+  String date = '';
   @override
   void initState() {
     super.initState();
@@ -50,11 +51,12 @@ class _ViewHistoryState extends State<ViewHistory> {
 
   @override
   Widget build(BuildContext context) {
+    date = '${widget.card.dd}/${widget.card.mm}/${widget.card.yy}';
     ran = widget.card.qty!;
     if (widget.card.profit == null) {
       message2 = 'Stock increase: +${widget.card.qty}';
     } else {
-      message = 'Profit: RM ${widget.card.profit}';
+      message = 'Profit: \$ ${widget.card.profit}';
       message2 = 'Stock change: ${widget.card.qty}';
       newprofit = double.parse(tprofit) - double.parse(widget.card.profit!);
       num = 1;
@@ -81,45 +83,46 @@ class _ViewHistoryState extends State<ViewHistory> {
           style: GoogleFonts.poppins(),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xff69f2fb),
-              Color(0xcc69f2fb),
-              Color(0x9969f2fb),
-              Color(0x6669f2fb),
-            ])),
-        child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Container(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color: Colors.deepPurple[900],
-                    borderRadius: BorderRadius.circular(30)),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    'Item Name: ${widget.card.iname}\n'
-                    'Date: ${widget.card.dd}/${widget.card.mm}/${widget.card.yy}\n$message2\n$message',
-                    textAlign: TextAlign.justify,
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 22.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 1)),
+                child: Text(
+                  'Item Name: ${widget.card.iname}\n'
+                  'Date: $date\n$message2\n$message',
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 22.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
+                // child: Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                // widget.card.profit!.isEmpty
+                //     ? const Text('Item Name \nDate \nStock increase')
+                //     : const Text(
+                //         'Item Name \nDate \nStock Change \nProfit '),
+                // widget.card.profit!.isEmpty
+                //     ? Text(
+                //         ': ${widget.card.iname}\n: $date\n: +${widget.card.qty}')
+                //     : Text(
+                //         ': ${widget.card.iname}\n: $date\n: -${widget.card.qty}\n: \$ ${widget.card.profit}'),
+                // ],
+                // )
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -207,13 +210,21 @@ class _ViewHistoryState extends State<ViewHistory> {
           fontSize: 16.0);
     } on PlatformException catch (e) {
       Fluttertoast.showToast(
-          msg: "Something went wrong!\n(｡•᎔•｡)",
+          msg: e.toString(),
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
+      // Fluttertoast.showToast(
+      //     msg: "Something went wrong!\n(｡•᎔•｡)",
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.CENTER,
+      //     timeInSecForIosWeb: 1,
+      //     backgroundColor: Colors.red,
+      //     textColor: Colors.white,
+      //     fontSize: 16.0);
     }
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const HistoryPage()));

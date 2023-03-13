@@ -14,7 +14,7 @@ class DateCard extends StatelessWidget {
     if (card.profit == null) {
       message2 = 'Stock increase: +${card.qty}';
     } else {
-      message = 'Profit: RM ${card.iprofit}';
+      message = 'Profit: \$ ${card.iprofit}';
       message2 = 'Stock change: ${card.qty}';
     }
 

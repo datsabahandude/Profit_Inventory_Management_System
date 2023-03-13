@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dummytest/homePage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'models/feedback_model.dart';
 import 'models/user_model.dart';
 
@@ -111,7 +112,7 @@ class MapScreenState extends State<FeedbackPage> {
       color: Colors.white,
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width * 0.5,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
@@ -124,7 +125,7 @@ class MapScreenState extends State<FeedbackPage> {
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 20,
-                color: Colors.purple,
+                color: Color(0xff360c72),
                 fontWeight: FontWeight.bold),
           ),
         ),
@@ -176,6 +177,23 @@ class MapScreenState extends State<FeedbackPage> {
               const SizedBox(
                 height: 20.0,
               ),
+              const Spacer(),
+              TextButton.icon(
+                  onPressed: () {
+                    _launchUrl();
+                  },
+                  icon: const Text(
+                    'My GitHub Profile',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                  label:
+                      // ClipOval(
+                      //   child: Image.asset('images/github-logo.png', fit: BoxFit.cover),
+                      // ),
+                      const CircleAvatar(
+                    backgroundImage: AssetImage('images/github-logo.png'),
+                    backgroundColor: Colors.white,
+                  ))
             ],
           ),
         ),
@@ -230,5 +248,13 @@ class MapScreenState extends State<FeedbackPage> {
         (context),
         MaterialPageRoute(builder: (context) => const HomePage()),
         (route) => false);
+  }
+
+  /// Github Profile
+  Future<void> _launchUrl() async {
+    final Uri _url = Uri.parse('https://github.com/datsabahandude');
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }

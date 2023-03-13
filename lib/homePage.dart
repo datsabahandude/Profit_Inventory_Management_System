@@ -187,12 +187,12 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
-            TextButton(
+            TextButton.icon(
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ProfilePage()));
               },
-              child: userModel.username == null
+              icon: userModel.username == null
                   ? Container()
                   : Text(
                       "${userModel.username} ",
@@ -204,11 +204,11 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.w800),
                       ),
                     ),
-            ),
-            const Icon(
-              Icons.account_circle_rounded,
-              color: Colors.white,
-              size: 30,
+              label: const Icon(
+                Icons.account_circle_rounded,
+                color: Colors.white,
+                size: 30,
+              ),
             ),
           ],
           backgroundColor: const Color(0xff360c72),
