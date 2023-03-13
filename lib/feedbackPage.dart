@@ -141,24 +141,6 @@ class MapScreenState extends State<FeedbackPage> {
           'SEND FEEDBACK',
           style: GoogleFonts.poppins(),
         ),
-        actions: [
-          TextButton.icon(
-              onPressed: () {
-                _launchUrl();
-              },
-              icon: const Text(
-                'GitHub',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-              label:
-                  // ClipOval(
-                  //   child: Image.asset('images/github-logo.png', fit: BoxFit.cover),
-                  // ),
-                  const CircleAvatar(
-                backgroundImage: AssetImage('images/github-logo.png'),
-                backgroundColor: Colors.white,
-              ))
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
@@ -195,6 +177,23 @@ class MapScreenState extends State<FeedbackPage> {
               const SizedBox(
                 height: 20.0,
               ),
+              const Spacer(),
+              TextButton.icon(
+                  onPressed: () {
+                    _launchUrl();
+                  },
+                  icon: const Text(
+                    'My GitHub Profile',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                  label:
+                      // ClipOval(
+                      //   child: Image.asset('images/github-logo.png', fit: BoxFit.cover),
+                      // ),
+                      const CircleAvatar(
+                    backgroundImage: AssetImage('images/github-logo.png'),
+                    backgroundColor: Colors.white,
+                  ))
             ],
           ),
         ),
