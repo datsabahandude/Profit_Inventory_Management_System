@@ -93,7 +93,7 @@ class MapScreenState extends State<EditItem>
       final imagetemp = File(image.path);
       setState(() => this.image = imagetemp);
     } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
     Navigator.of(context).pop();
   }
@@ -105,7 +105,7 @@ class MapScreenState extends State<EditItem>
       final imagetemp = File(image.path);
       setState(() => this.image = imagetemp);
     } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
     Navigator.of(context).pop();
   }
@@ -487,13 +487,13 @@ class MapScreenState extends State<EditItem>
       //postDetailsToFireStore();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wea-password') {
-        print('Something went Wrong :(');
+        debugPrint('Something went Wrong :(');
       } else if (e.code == 'Something went Wrong :(') ;
       {
-        print('Failed to Add Item D:');
+        debugPrint('Failed to Add Item D:');
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
     }
   }
 
