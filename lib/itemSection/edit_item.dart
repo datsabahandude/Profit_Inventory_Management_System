@@ -34,7 +34,7 @@ class MapScreenState extends State<EditItem>
   String olddate = "";
   String profit = '';
   String sold = '';
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   UserModel userModel = UserModel();
@@ -44,7 +44,6 @@ class MapScreenState extends State<EditItem>
   String? url;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
@@ -53,7 +52,7 @@ class MapScreenState extends State<EditItem>
         .doc('${widget.receive.date}')
         .get()
         .then((value) {
-      this.itemModel = ItemModel.fromMap(value.data());
+      itemModel = ItemModel.fromMap(value.data());
       setState(() {});
       if (itemModel.tprofit != null) {
         profit = '${itemModel.tprofit}';
@@ -66,6 +65,14 @@ class MapScreenState extends State<EditItem>
         sold = '0';
       }
     });
+    if (widget.receive.img != null) {
+      url = widget.receive.img;
+    }
+    inameEditingController.text = widget.receive.iname!;
+    descriptionEditingController.text = widget.receive.description!;
+    sellpriceEditingController.text = widget.receive.sell!;
+    buypriceEditingController.text = widget.receive.buy!;
+    qtyEditingController.text = widget.receive.qty!;
   }
 
   Future uploadFile() async {
@@ -79,13 +86,10 @@ class MapScreenState extends State<EditItem>
     setState(() {
       url = urlDownload;
     });
-    if (picurl != null) {
-      FirebaseStorage.instance.refFromURL('${picurl}').delete();
-    }
+    FirebaseStorage.instance.refFromURL(picurl).delete();
     postDetailsToFireStore();
   }
 
-  @override
   Future _pickImageCamera() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -120,6 +124,7 @@ class MapScreenState extends State<EditItem>
           if (value!.isEmpty) {
             return 'Please Enter Item Name !';
           }
+          return null;
         },
         onSaved: (value) {
           inameEditingController.text = value!;
@@ -149,6 +154,7 @@ class MapScreenState extends State<EditItem>
           if (value!.isEmpty) {
             return 'Please Enter Item Description !';
           }
+          return null;
         },
         onSaved: (value) {
           olddate = '${itemModel.date}';
@@ -188,6 +194,7 @@ class MapScreenState extends State<EditItem>
           if (buy >= sell) {
             return 'Cannot gain profit this way !';
           }
+          return null;
         },
         onSaved: (value) {
           buypriceEditingController.text = value!;
@@ -225,6 +232,7 @@ class MapScreenState extends State<EditItem>
           if (buy > sell) {
             return 'Selling price should be higher than buy price !';
           }
+          return null;
         },
         onSaved: (value) {
           sellpriceEditingController.text = value!;
@@ -258,6 +266,7 @@ class MapScreenState extends State<EditItem>
           if (value!.isEmpty) {
             return 'Please Enter Item quantity !';
           }
+          return null;
         },
         onSaved: (value) {
           qtyEditingController.text = value!;
@@ -319,19 +328,26 @@ class MapScreenState extends State<EditItem>
                             fit: BoxFit.cover,
                           ),
                         )
-                      : const FlutterLogo(
-                          size: 180,
-                        ),
+                      : url != null
+                          ? ClipOval(
+                              child: Image.network(
+                                url!,
+                                width: 200,
+                                height: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("images/profitinventory.png"),
+                              backgroundColor: Colors.transparent,
+                              radius: 100),
                   Positioned(
                       top: 120,
                       left: 100,
                       child: RawMaterialButton(
                         elevation: 10,
                         fillColor: Colors.white,
-                        child: const Icon(
-                          Icons.add_a_photo_outlined,
-                          color: Colors.purple,
-                        ),
                         padding: const EdgeInsets.all(15),
                         shape: const CircleBorder(),
                         onPressed: () {
@@ -407,6 +423,10 @@ class MapScreenState extends State<EditItem>
                                 );
                               });
                         },
+                        child: const Icon(
+                          Icons.add_a_photo_outlined,
+                          color: Colors.purple,
+                        ),
                       )),
                 ],
               ),
@@ -457,6 +477,8 @@ class MapScreenState extends State<EditItem>
                             fontSize: 16.0);
                       }
                     },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
                     child: Text(
                       "UPDATE ITEM",
                       textAlign: TextAlign.center,
@@ -467,8 +489,6 @@ class MapScreenState extends State<EditItem>
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
                   ),
                 ),
               ),
@@ -479,17 +499,14 @@ class MapScreenState extends State<EditItem>
     );
   }
 
-  @override
   void update(String username) async {
-    var msg = '';
     try {
       uploadFile();
       //postDetailsToFireStore();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wea-password') {
         debugPrint('Something went Wrong :(');
-      } else if (e.code == 'Something went Wrong :(') ;
-      {
+      } else if (e.code == 'Something went Wrong :(') {
         debugPrint('Failed to Add Item D:');
       }
     } catch (e) {
