@@ -180,13 +180,13 @@ class MapScreenState extends State<ProfilePage>
       postDetailsToFireStore();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wea-password') {
-        print('Something went wrong :(');
+        debugPrint('Something went wrong :(');
       } else if (e.code == 'Something went wrong :(') ;
       {
-        print('Failed to Update D:');
+        debugPrint('Failed to Update D:');
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
     }
   }
 

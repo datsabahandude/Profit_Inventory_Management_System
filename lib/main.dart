@@ -7,13 +7,15 @@ import 'loginPage.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'PROFITI',
       debugShowCheckedModeBanner: false,
       home: First(),
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
 }
 
 class First extends StatelessWidget {
+  const First({super.key});
+
   @override
   Widget build(BuildContext context) => Scaffold(
           body: StreamBuilder<User?>(

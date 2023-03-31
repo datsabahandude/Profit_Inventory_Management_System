@@ -207,13 +207,13 @@ class MapScreenState extends State<FeedbackPage> {
       postDetailsToFireStore();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wea-password') {
-        print('an error occured');
+        debugPrint('an error occured');
       } else if (e.code == 'Email Existed') ;
       {
-        print('Something went wrong :(');
+        debugPrint('Something went wrong :(');
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
     }
   }
 
