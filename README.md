@@ -9,7 +9,7 @@ backend
 ![image](https://user-images.githubusercontent.com/107204865/209436150-23329e39-e9d4-434a-92e0-889f422db8ed.png)
 
 # UI
-![image](https://user-images.githubusercontent.com/107204865/233169178-ebc27b84-f915-4f03-8b5a-8cb09917a8d4.png)
-![image](https://user-images.githubusercontent.com/107204865/233168858-b63cb8e3-0d25-4401-8d12-64d40668960c.png)
+![Profiti_page-0005](https://user-images.githubusercontent.com/107204865/233357904-ed8fe3d4-ce95-487a-a72b-6fcfaa3d8719.jpg)
+![Profiti_page-0006](https://user-images.githubusercontent.com/107204865/233357938-7407c49d-d2bc-48e0-bb12-2f5dde7a0727.jpg)
 
 
